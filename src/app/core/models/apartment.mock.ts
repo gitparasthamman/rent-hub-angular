@@ -30,8 +30,8 @@ export const APARTMENTS: Apartment[] = [
     vegetarianPreference: 'No Preference',
 
     images: [
-      '/assets/prop_1_1.jpg',
-      '/assets/prop_1_2.jpg'
+      'assets/prop_1_1.jpg',
+      'assets/prop_1_2.jpg'
     ],
 
     landlord: {
@@ -75,8 +75,8 @@ export const APARTMENTS: Apartment[] = [
     vegetarianPreference: 'No Preference',
 
     images: [
-      '/assets/prop_2_1.jpg',
-      '/assets/prop_2_2.jpg'
+      'assets/prop_2_1.jpg',
+      'assets/prop_2_2.jpg'
     ],
 
     landlord: {
@@ -117,7 +117,7 @@ export const APARTMENTS: Apartment[] = [
     vegetarianPreference: 'Vegetarian Preferred',
 
     images: [
-      '/assets/prop_3_1.jpg',
+      'assets/prop_3_1.jpg',
     ],
 
     landlord: {
@@ -159,7 +159,7 @@ export const APARTMENTS: Apartment[] = [
     vegetarianPreference: 'No Preference',
 
     images: [
-      '/assets/prop_4_1.jpg'
+      'assets/prop_4_1.jpg'
     ],
 
     landlord: {
@@ -201,7 +201,7 @@ export const APARTMENTS: Apartment[] = [
     vegetarianPreference: 'No Preference',
 
     images: [
-      '/assets/prop_5_1.jpg'
+      'assets/prop_5_1.jpg'
     ],
 
     landlord: {
@@ -246,7 +246,7 @@ export const APARTMENTS: Apartment[] = [
     vegetarianPreference: 'No Preference',
 
     images: [
-      '/assets/prop_6_1.jpg'
+      'assets/prop_6_1.jpg'
     ],
 
     landlord: {
