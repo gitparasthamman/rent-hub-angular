@@ -1,0 +1,108 @@
+<section class="home-container">
+
+  <app-featured-carousel
+    [apartments]="featuredApartments">
+  </app-featured-carousel>
+
+  <!-- <div>
+
+    <h1>
+      Find Your Perfect Home
+    </h1>
+
+    <p>
+      Discover apartments, houses and rooms
+      that match your lifestyle.
+    </p>
+
+  </div> 
+
+</section> -->
+
+<app-search-filter
+  (filterChanged)="onFilterChanged($event)">
+</app-search-filter>
+
+  <div class="section-header">
+
+    <div>
+
+      <h2>
+        Available Properties
+      </h2>
+
+      <p>
+        {{ apartments.length }} properties available
+      </p>
+
+    </div>
+
+    <!-- <mat-form-field>
+      <mat-label>Sort by</mat-label>
+      <mat-select
+        [value]="sortBy"
+        (selectionChange)="onSortChanged($event.value)">
+        <mat-option value="newest">
+          Newest
+        </mat-option>
+        <mat-option value="priceLow">
+          Price: Low to High
+        </mat-option>
+        <mat-option value="priceHigh">
+          Price: High to Low
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+<mat-form-field appearance="outline">
+  <mat-label>
+    Sort By
+  </mat-label>
+
+  <mat-select
+    [value]="sortBy"
+    (selectionChange)="onSortChanged($event.value)">
+
+    <mat-option value="newest">
+      Newest
+    </mat-option>
+
+    <mat-option value="priceLow">
+      Price: Low to High
+    </mat-option>
+
+    <mat-option value="priceHigh">
+      Price: High to Low
+    </mat-option>
+
+  </mat-select>
+
+</mat-form-field>
+
+  </div>
+
+
+  <div class="apartment-grid">
+
+    @for (
+      apartment of paginatedApartments;
+      track apartment.id
+    ) {
+
+      <app-apartment-card
+        [apartment]="apartment">
+      </app-apartment-card>
+
+    }
+
+  </div>
+
+  <mat-paginator
+  [length]="apartments.length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[3, 6, 12]"
+  (page)="onPageChanged($event)"
+  aria-label="Apartment listings">
+</mat-paginator>
+
+</section>

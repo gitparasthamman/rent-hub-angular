@@ -1,0 +1,51 @@
+.apartment-card {
+  height: 100%;
+  overflow: hidden;
+}
+
+.apartment-card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.price {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.location {
+  color: #666;
+}
+
+.details {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.amenities {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.amenity {
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: #eef2ff;
+  font-size: 12px;
+}

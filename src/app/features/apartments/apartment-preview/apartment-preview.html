@@ -1,0 +1,231 @@
+<div class="page-container">
+
+  <mat-card class="preview-card">
+
+    <mat-card-header>
+
+      <mat-card-title>
+        Preview Your Apartment
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        Review the information before submitting.
+      </mat-card-subtitle>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      @if (apartment; as item) {
+
+        <!-- PROPERTY -->
+
+        <section>
+
+          <h2>
+            {{ item.title }}
+          </h2>
+
+          <p class="description">
+            {{ item.description }}
+          </p>
+
+        </section>
+
+
+        <!-- LOCATION -->
+
+        <section>
+
+          <h3>Location</h3>
+
+          <p>
+            {{ item.location }}
+          </p>
+
+        </section>
+
+
+        <!-- RENTAL DETAILS -->
+
+        <section>
+
+          <h3>Property Details</h3>
+
+
+          <div class="details-grid">
+
+            <div>
+              <strong>Price</strong>
+
+              <span>
+                ₹{{ item.price }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Bedrooms</strong>
+
+              <span>
+                {{ item.bedrooms }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Bathrooms</strong>
+
+              <span>
+                {{ item.bathrooms }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Property Type</strong>
+
+              <span>
+                {{ item.propertyType }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Furnished</strong>
+
+              <span>
+                {{ item.furnished
+                  ? 'Yes'
+                  : 'No'
+                }}
+              </span>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- AMENITIES -->
+
+        <section>
+
+          <h3>Amenities</h3>
+
+
+          <div class="amenities">
+
+            @for (
+              amenity of item.amenities;
+              track amenity
+            ) {
+
+              <span class="amenity">
+
+                {{ amenity }}
+
+              </span>
+
+            }
+
+          </div>
+
+        </section>
+
+
+        <!-- FOOD -->
+
+        <section>
+
+          <h3>Food Preference</h3>
+
+          <p>
+            {{ item.vegetarianPreference }}
+          </p>
+
+        </section>
+
+
+        <!-- IMAGES -->
+
+        @if (item.images.length > 0) {
+
+          <section>
+
+            <h3>Images</h3>
+
+
+            <div class="image-grid">
+
+              @for (
+                image of item.images;
+                track image
+              ) {
+
+                <img
+                  [src]="image"
+                  [alt]="item.title"
+                />
+
+              }
+
+            </div>
+
+          </section>
+
+        }
+
+
+        <!-- LANDLORD -->
+
+        <section>
+
+          <h3>Landlord</h3>
+
+          <p>
+            {{ item.landlord.name }}
+          </p>
+
+          <p>
+            {{ item.landlord.email }}
+          </p>
+
+          <p>
+            {{ item.landlord.phone }}
+          </p>
+
+        </section>
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+          <button mat-stroked-button type="button" (click)="backToForm()">
+            Back to Form
+          </button>
+
+
+          <button
+            mat-flat-button
+            type="button"
+            (click)="submit()">
+
+            {{ mode === 'create'
+                ? 'Submit Apartment'
+                : 'Update Apartment'
+            }}
+
+          </button>
+
+        </div>
+
+      }
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

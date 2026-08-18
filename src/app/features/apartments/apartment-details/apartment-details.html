@@ -1,0 +1,348 @@
+<div class="page-container">
+
+  @if (apartment; as item) {
+
+    <mat-card class="details-card">
+
+      <!-- HEADER -->
+
+      <mat-card-header>
+
+        <mat-card-title>
+          {{ item.title }}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          {{ item.location }}
+        </mat-card-subtitle>
+
+      </mat-card-header>
+
+
+      <mat-card-content>
+
+        <!-- IMAGES -->
+
+        @if (item.images.length > 0) {
+
+          <div class="image-grid">
+
+            @for (
+              image of item.images;
+              track image
+            ) {
+
+              <img
+                [src]="image"
+                [alt]="item.title"
+              />
+
+            }
+
+          </div>
+
+        }
+
+
+        <!-- DESCRIPTION -->
+
+        <section>
+
+          <h2>Description</h2>
+
+          <p>
+            {{ item.description }}
+          </p>
+
+        </section>
+
+
+        <!-- PROPERTY DETAILS -->
+
+        <section>
+
+          <h2>Property Details</h2>
+
+          <div class="details-grid">
+
+            <div>
+              <strong>Monthly Rent</strong>
+
+              <span>
+                ₹{{ item.price }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Bedrooms</strong>
+
+              <span>
+                {{ item.bedrooms }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Bathrooms</strong>
+
+              <span>
+                {{ item.bathrooms }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Property Type</strong>
+
+              <span>
+                {{ item.propertyType }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Furnished</strong>
+
+              <span>
+                {{ item.furnished
+                  ? 'Yes'
+                  : 'No'
+                }}
+              </span>
+            </div>
+
+
+            <div>
+              <strong>Food Preference</strong>
+
+              <span>
+                {{ item.vegetarianPreference }}
+              </span>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- AMENITIES -->
+
+        <section>
+
+          <h2>Amenities</h2>
+
+          <div class="amenities">
+
+            @for (
+              amenity of item.amenities;
+              track amenity
+            ) {
+
+              <span class="amenity">
+
+                {{ amenity }}
+
+              </span>
+
+            }
+
+          </div>
+
+        </section>
+
+
+        <!-- LANDLORD -->
+
+        <section>
+
+          <h2>Landlord</h2>
+
+          <div class="landlord">
+
+            <p>
+              <strong>Name:</strong>
+              {{ item.landlord.name }}
+            </p>
+
+            <p>
+              <strong>Email:</strong>
+              {{ item.landlord.email }}
+            </p>
+
+            <p>
+              <strong>Phone:</strong>
+              {{ item.landlord.phone }}
+            </p>
+
+          </div>
+
+        </section>
+
+
+      </mat-card-content>
+
+
+      <!-- ACTIONS -->
+
+      <mat-card-actions>
+
+        <button mat-stroked-button type="button" (click)="toggleFavorite()">
+
+          @if (isFavorite()) {
+            <ng-container>
+              <mat-icon>favorite</mat-icon>
+              <span>Remove Favorite</span>
+            </ng-container>
+          } @else {
+            <ng-container>
+              <mat-icon>favorite_border</mat-icon>
+              <span>Add to Favorites</span>
+            </ng-container>
+          }
+
+        </button>
+
+        <button
+          mat-flat-button
+          type="button"
+          (click)="editApartment()">
+
+          Edit Apartment
+
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+ <section class="comments-section">
+
+  <h2>
+    Comments
+  </h2>
+
+  <!-- ADD COMMENT -->
+  <div class="comment-form">
+    <textarea rows="4" placeholder="Ask a question or leave a comment..." [(ngModel)]="newComment">    </textarea>
+    <button
+      mat-flat-button
+      type="button"
+      (click)="addComment()">
+
+      Add Comment
+
+    </button>
+
+  </div>
+
+
+  <!-- COMMENTS -->
+
+  @if (comments.length === 0) {
+
+    <p class="no-comments">
+
+      No comments yet.
+      Be the first to start the conversation.
+
+    </p>
+
+  }
+
+
+  @for (
+    comment of comments;
+    track comment.id
+  ) {
+
+    <mat-card class="comment-card">
+
+      <mat-card-content>
+
+        <div class="comment-header">
+
+          <strong>
+            {{ comment.userName }}
+          </strong>
+
+          <span>
+            {{ comment.createdAt | date:'medium' }}
+          </span>
+
+        </div>
+
+
+        <p class="comment-text">
+
+          {{ comment.text }}
+
+        </p>
+
+
+        <!-- REPLIES -->
+
+        @for (
+          reply of comment.replies;
+          track reply.id
+        ) {
+
+          <div class="reply">
+
+            <div class="comment-header">
+
+              <strong>
+                {{ reply.userName }}
+              </strong>
+
+              <span>
+                {{ reply.createdAt | date:'medium' }}
+              </span>
+
+            </div>
+
+            <p>
+              {{ reply.text }}
+            </p>
+
+          </div>
+        }
+
+        <div class="reply-form">
+        <input
+            type="text"
+            placeholder="Write a reply..."
+            [(ngModel)]="replyText[comment.id]"
+        />
+
+        <button
+            mat-stroked-button
+            type="button"
+            (click)="addReply(comment)">
+            Reply
+        </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
+</section>
+
+  }
+
+  @if (notFound) {
+    <mat-card>
+      <mat-card-content>
+        <h2>
+          Apartment Not Found
+        </h2>
+
+        <p>
+          The apartment you are looking for
+          does not exist.
+        </p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+</div>

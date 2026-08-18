@@ -1,0 +1,37 @@
+.search-panel {
+  padding: 24px;
+  margin-bottom: 32px;
+  border-radius: 16px;
+  background: white;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.search-header {
+  margin-bottom: 20px;
+}
+
+.search-header h2 {
+  margin-bottom: 4px;
+}
+
+.search-header p {
+  color: #666;
+}
+
+form {
+  display: grid;
+  grid-template-columns:
+    2fr
+    1fr
+    1fr
+    auto;
+
+  gap: 16px;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}

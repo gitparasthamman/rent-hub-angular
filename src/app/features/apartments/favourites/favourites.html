@@ -1,0 +1,25 @@
+<div class="favorites-page">
+
+  <h1>
+    My Favorites
+  </h1>
+
+  @if (apartments.length === 0) {
+    <p>
+      You haven't added any apartments
+      to your favorites yet.
+    </p>
+  }
+
+  <div class="apartment-grid">
+
+    @for (
+      apartment of apartments;
+      track apartment.id
+    ) {
+      <app-apartment-card [apartment]="apartment"> </app-apartment-card>
+    }
+
+  </div>
+
+</div>

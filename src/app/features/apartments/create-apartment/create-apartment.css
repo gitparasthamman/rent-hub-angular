@@ -1,0 +1,109 @@
+.page-container {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  padding: 32px 20px;
+}
+
+
+.form-card {
+  width: 100%;
+}
+
+
+form {
+  margin-top: 24px;
+}
+
+
+section {
+  padding: 24px 0;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+
+section:last-child {
+  border-bottom: none;
+}
+
+
+h2 {
+  margin-bottom: 20px;
+
+  font-size: 20px;
+}
+
+
+mat-form-field {
+  width: 100%;
+
+  margin-bottom: 8px;
+}
+
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 16px;
+}
+
+
+.amenities-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 12px;
+}
+
+
+mat-radio-group {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 24px;
+}
+
+
+.hint {
+  font-size: 13px;
+
+  color: #666;
+}
+
+
+.form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 16px;
+
+  margin-top: 28px;
+}
+
+
+@media (max-width: 768px) {
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .amenities-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .page-container {
+    padding: 16px;
+  }
+
+}

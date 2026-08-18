@@ -1,0 +1,76 @@
+@if (apartments().length > 0) {
+
+  <section class="carousel">
+
+    <img
+      class="carousel-image"
+      [src]="apartments()[currentIndex].images[0]"
+      [alt]="apartments()[currentIndex].title"
+    />
+
+    <div class="overlay">
+
+      <div>
+
+        <span class="featured">
+          FEATURED
+        </span>
+
+        <h2>
+          {{ apartments()[currentIndex].title }}
+        </h2>
+
+        <p>
+          📍 {{ apartments()[currentIndex].location }}
+        </p>
+
+        <strong>
+          ₹{{ apartments()[currentIndex].price | number }}/month
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="previous"
+      (click)="previous()"
+      aria-label="Previous property">
+
+      ‹
+
+    </button>
+
+
+    <button
+      class="next"
+      (click)="next()"
+      aria-label="Next property">
+
+      ›
+
+    </button>
+
+
+    <div class="indicators">
+
+      @for (
+        apartment of apartments();
+        track apartment.id;
+        let i = $index
+      ) {
+
+        <button
+          [class.active]="i === currentIndex"
+          (click)="select(i)"
+          [attr.aria-label]="'Show property ' + (i + 1)">
+        </button>
+
+      }
+
+    </div>
+
+  </section>
+
+}

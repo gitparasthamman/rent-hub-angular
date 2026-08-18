@@ -1,0 +1,66 @@
+.hero {
+  min-height: 320px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 48px;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url('./../../../../public/assets/home_background.jpg');
+
+  background-size: cover;
+  background-position: center;
+
+  color: white;
+
+  margin-bottom: 32px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 18px;
+}
+
+.home-container {
+  max-width: 1400px;
+  margin: auto;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  margin-bottom: 4px;
+}
+
+.section-header p {
+  color: #666;
+}
+
+.apartment-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(280px, 1fr)
+    );
+
+  gap: 24px;
+}

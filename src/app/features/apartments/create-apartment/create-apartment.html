@@ -1,0 +1,494 @@
+<div class="page-container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>
+        Post Your Apartment
+      </mat-card-title>
+      <mat-card-subtitle>
+        Add details about your property
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form
+        [formGroup]="apartmentForm"
+        (ngSubmit)="onSubmit()">
+
+        <!-- ========================= -->
+        <!-- PROPERTY INFORMATION -->
+        <!-- ========================= -->
+
+        <section>
+          <h2>Property Information</h2>
+          <mat-form-field appearance="outline">
+            <mat-label>
+              Property Title
+            </mat-label>
+            <input
+              matInput
+              formControlName="title"
+              placeholder="e.g. Spacious 2 BHK Apartment"
+            />
+            @if (
+              apartmentForm.controls.title.invalid &&
+              apartmentForm.controls.title.touched
+            ) {
+
+              <mat-error>
+                Title must be between
+                5 and 100 characters.
+              </mat-error>
+
+            }
+
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>
+              Description
+            </mat-label>
+
+            <textarea
+              matInput
+              rows="5"
+              formControlName="description"
+              placeholder="Describe your property..."
+            ></textarea>
+
+
+            @if (
+              apartmentForm.controls.description.invalid &&
+              apartmentForm.controls.description.touched
+            ) {
+
+              <mat-error>
+                Description must be between
+                20 and 1000 characters.
+              </mat-error>
+
+            }
+
+          </mat-form-field>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- LOCATION -->
+        <!-- ========================= -->
+
+        <section>
+
+          <h2>Location</h2>
+
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>
+              Location
+            </mat-label>
+
+            <input
+              matInput
+              formControlName="location"
+              placeholder="e.g. Chandigarh"
+            />
+
+
+            @if (
+              apartmentForm.controls.location.invalid &&
+              apartmentForm.controls.location.touched
+            ) {
+
+              <mat-error>
+                Location is required.
+              </mat-error>
+
+            }
+
+          </mat-form-field>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- RENTAL DETAILS -->
+        <!-- ========================= -->
+
+        <section>
+
+          <h2>Rental Details</h2>
+
+
+          <div class="form-grid">
+
+
+            <!-- PRICE -->
+
+            <mat-form-field appearance="outline">
+
+              <mat-label>
+                Monthly Rent
+              </mat-label>
+
+              <input
+                matInput
+                type="number"
+                formControlName="price"
+              />
+
+              <span matTextPrefix>
+                ₹&nbsp;
+              </span>
+
+
+              @if (
+                apartmentForm.controls.price.invalid &&
+                apartmentForm.controls.price.touched
+              ) {
+
+                <mat-error>
+                  Rent must be greater than 0.
+                </mat-error>
+
+              }
+
+            </mat-form-field>
+
+
+            <!-- BEDROOMS -->
+
+            <mat-form-field appearance="outline">
+
+              <mat-label>
+                Bedrooms
+              </mat-label>
+
+              <mat-select
+                formControlName="bedrooms">
+
+                @for (
+                  bedroom of [1, 2, 3, 4, 5, 6];
+                  track bedroom
+                ) {
+
+                  <mat-option
+                    [value]="bedroom">
+
+                    {{ bedroom }}
+
+                  </mat-option>
+
+                }
+
+              </mat-select>
+
+            </mat-form-field>
+
+
+            <!-- BATHROOMS -->
+
+            <mat-form-field appearance="outline">
+
+              <mat-label>
+                Bathrooms
+              </mat-label>
+
+              <mat-select
+                formControlName="bathrooms">
+
+                @for (
+                  bathroom of [1, 2, 3, 4, 5];
+                  track bathroom
+                ) {
+
+                  <mat-option
+                    [value]="bathroom">
+
+                    {{ bathroom }}
+
+                  </mat-option>
+
+                }
+
+              </mat-select>
+
+            </mat-form-field>
+
+
+            <!-- PROPERTY TYPE -->
+
+            <mat-form-field appearance="outline">
+
+              <mat-label>
+                Property Type
+              </mat-label>
+
+              <mat-select
+                formControlName="propertyType">
+
+                @for (
+                  type of propertyTypes;
+                  track type
+                ) {
+
+                  <mat-option
+                    [value]="type">
+
+                    {{ type }}
+
+                  </mat-option>
+
+                }
+
+              </mat-select>
+
+            </mat-form-field>
+
+          </div>
+
+
+          <mat-checkbox
+            formControlName="furnished">
+
+            Furnished Property
+
+          </mat-checkbox>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- AMENITIES -->
+        <!-- ========================= -->
+
+        <section>
+
+          <h2>Amenities</h2>
+
+          <div class="amenities-grid">
+
+            @for (
+              amenity of amenities;
+              track amenity
+            ) {
+
+              <mat-checkbox
+                [checked]="
+                  apartmentForm.controls.amenities
+                    .value
+                    .includes(amenity)
+                "
+
+                (change)="
+                  toggleAmenity(
+                    amenity,
+                    $event.checked
+                  )
+                "
+              >
+
+                {{ amenity }}
+
+              </mat-checkbox>
+
+            }
+
+          </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- FOOD PREFERENCE -->
+        <!-- ========================= -->
+
+        <section>
+
+          <h2>Food Preference</h2>
+
+
+          <mat-radio-group
+            formControlName="vegetarianPreference">
+
+            @for (
+              preference of vegetarianPreferences;
+              track preference
+            ) {
+
+              <mat-radio-button
+                [value]="preference">
+
+                {{ preference }}
+
+              </mat-radio-button>
+
+            }
+
+          </mat-radio-group>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- LANDLORD INFORMATION -->
+        <!-- ========================= -->
+
+        <section>
+
+          <h2>Landlord Information</h2>
+
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>
+              Name
+            </mat-label>
+
+            <input
+              matInput
+              formControlName="landlordName"
+            />
+
+
+            @if (
+              apartmentForm.controls.landlordName.invalid &&
+              apartmentForm.controls.landlordName.touched
+            ) {
+
+              <mat-error>
+                Name is required.
+              </mat-error>
+
+            }
+
+          </mat-form-field>
+
+
+          <div class="form-grid">
+
+
+            <mat-form-field appearance="outline">
+
+              <mat-label>
+                Email
+              </mat-label>
+
+              <input
+                matInput
+                type="email"
+                formControlName="landlordEmail"
+              />
+
+
+              @if (
+                apartmentForm.controls.landlordEmail.invalid &&
+                apartmentForm.controls.landlordEmail.touched
+              ) {
+
+                <mat-error>
+                  Enter a valid email.
+                </mat-error>
+
+              }
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline">
+
+              <mat-label>
+                Phone
+              </mat-label>
+
+              <input
+                matInput
+                formControlName="landlordPhone"
+              />
+
+
+              @if (
+                apartmentForm.controls.landlordPhone.invalid &&
+                apartmentForm.controls.landlordPhone.touched
+              ) {
+
+                <mat-error>
+                  Enter a valid phone number.
+                </mat-error>
+
+              }
+
+            </mat-form-field>
+
+          </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- IMAGES -->
+        <!-- ========================= -->
+
+        <section>
+
+          <h2>Property Images</h2>
+
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>
+              Image URLs
+            </mat-label>
+
+            <textarea
+              matInput
+              rows="4"
+              formControlName="images"
+              placeholder="Enter image URLs separated by commas"
+            ></textarea>
+
+          </mat-form-field>
+
+
+          <p class="hint">
+            Add multiple image URLs separated by commas.
+          </p>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- ACTIONS -->
+        <!-- ========================= -->
+
+        <div class="form-actions">
+
+          <button
+            mat-stroked-button
+            type="button"
+            routerLink="/home">
+
+            Cancel
+
+          </button>
+
+
+          <button
+            mat-flat-button
+            type="submit">
+
+            Preview Apartment
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>
