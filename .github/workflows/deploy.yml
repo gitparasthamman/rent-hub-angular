@@ -46,7 +46,7 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./dist/rent-hub
+          path: ./dist/rent-hub/browser
 
 
   deploy:
